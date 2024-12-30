@@ -3,3 +3,6 @@ build.cmd = ["npm install", "npm run build"]
 
 [tools]
 ffmpeg = "latest"
+
+[phases.setup]
+aptPkgs = ["...", "ffmpeg"]
