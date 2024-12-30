@@ -122,8 +122,15 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
     const videoFile = formData.get("file");
 
-    if (!videoFile) {
+    if (!videoFile || !(videoFile instanceof File)) {
         return NextResponse.json({ error: "No file uploaded." }, { status: 400 });
+    }
+    
+
+    if (videoFile.size > 50 * 1024 * 1024) {
+        return NextResponse.json({ 
+            error: "File size exceeds 50MB limit." 
+        }, { status: 400 });
     }
 
     try {

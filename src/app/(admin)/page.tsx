@@ -16,6 +16,7 @@ export default function UploadVideoComponent() {
     const [compressedVideo, setCompressedVideo] = useState<string | null>(null);
 
     const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setAlertMessage(null);
         const files = event.target.files;
         if (files && files[0]) {
             const file = files[0];
@@ -24,12 +25,19 @@ export default function UploadVideoComponent() {
                 setAlertType("error");
                 return;
             }
+
+            // Check file size (50MB = 50 * 1024 * 1024 bytes) // you can remove this code for testing locally I am just making this check because of low bandwidth issues on free server
+            if (file.size > 50 * 1024 * 1024) {
+                setAlertMessage("File size exceeds 50MB limit. Please upload a smaller video.");
+                setAlertType("error");
+                return;
+            }
+
             setSelectedFile(file);
             setVideoPreview(URL.createObjectURL(file));
             setCompressedVideo(null);
         }
     };
-
     const handleUpload = async () => {
         if (!selectedFile) {
             setAlertMessage("Please select a video file first.");
@@ -104,8 +112,17 @@ export default function UploadVideoComponent() {
                     </div>
                     <h1 className="text-4xl font-bold mb-4">Video Compression Tool</h1>
                     <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                        Using FFmpeg for efficient video compression. Optimized for files up to 100MB, perfect for quick sharing while
-                        maintaining quality.
+                        FFmpeg powers high-quality video compression for files of any size. Due to server limitations, this demo is capped at 50MB.
+                        For larger videos, install locally from our{" "}
+                        <a
+                            href="https://github.com/hassaanistic/Video-compressor"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:underline"
+                        >
+                            GitHub repository
+                        </a>
+                        {" "}with complete setup instructions.
                     </p>
                 </div>
 
@@ -148,7 +165,7 @@ export default function UploadVideoComponent() {
                     <CardHeader>
                         <CardTitle>Upload Your Video</CardTitle>
                         <CardDescription className="text-gray-400">
-                            MP4 format only. Maximum file size: 100MB (FFmpeg optimization limit)
+                            MP4 format only. Maximum file size: 50MB
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -177,7 +194,7 @@ export default function UploadVideoComponent() {
                                         <div className="flex flex-col items-center p-8 hover:bg-gray-700/50 rounded-lg transition-colors">
                                             <Upload className="h-16 w-16 mb-4 text-blue-500" />
                                             <span className="text-xl font-semibold mb-2">Drag & drop or click to upload</span>
-                                            <span className="text-gray-400">MP4 format only (max 100MB)</span>
+                                            <span className="text-gray-400">MP4 format only (max 50MB)</span>
                                         </div>
                                         <Input
                                             id="video-upload"
@@ -217,8 +234,7 @@ export default function UploadVideoComponent() {
                             {/* Alert Message */}
                             {alertMessage && (
                                 <div
-                                    className={`p-4 rounded-lg text-center ${
-                                        alertType === "success" ? "bg-green-800/50 text-green-200" : "bg-red-800/50 text-red-200"
+                                    className={`p-4 rounded-lg text-center ${alertType === "success" ? "bg-green-800/50 text-green-200" : "bg-red-800/50 text-red-200"
                                     }`}
                                 >
                                     {alertMessage}
@@ -232,7 +248,22 @@ export default function UploadVideoComponent() {
                 <div className="grid md:grid-cols-3 gap-6 mt-12 mx-2">
                     <div className="p-6 bg-gray-800 rounded-lg">
                         <h3 className="text-xl font-semibold mb-3">FFmpeg Powered</h3>
-                        <p className="text-gray-400">Using FFmpeg&apos;s advanced compression algorithms for optimal results up to 100MB.</p>
+                        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                            FFmpeg powers high-quality video compression for files of any size.
+                            <p>
+
+                                <a
+                                    href="https://github.com/hassaanistic/Video-compressor"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    GitHub repository
+                                </a>
+                                {" "}with complete setup instructions.
+                            </p>
+
+                        </p>
                     </div>
                     <div className="p-6 bg-gray-800 rounded-lg">
                         <h3 className="text-xl font-semibold mb-3">Secure Processing</h3>
