@@ -81,6 +81,32 @@ const getVideoDuration = async (buffer) => {
 - **Online Demo**: Limited to 50MB due to server constraints
 - **Local Installation**: No size limits, faster processing
 
+## 🔓 Removing Size Limits
+
+To process larger videos locally, remove these size checks:
+
+1. In `/app/api/upload/video/route.ts`:
+```typescript
+// Remove or modify this check
+if (videoFile.size > 50 * 1024 * 1024) {
+    return NextResponse.json({ 
+        error: "File size exceeds 50MB limit." 
+    }, { status: 400 });
+}
+```
+
+2. In `UploadVideoComponent.tsx`:
+```typescript
+// Remove or modify this check
+if (file.size > 50 * 1024 * 1024) {
+    setAlertMessage("File size exceeds 50MB limit. Please upload a smaller video.");
+    setAlertType("error");
+    return;
+}
+```
+
+Note: Size limits are implemented only for demo server constraints. Local installations can handle larger files based on your system's capabilities.
+
 
 ## 📝 License
 
