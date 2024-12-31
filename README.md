@@ -81,19 +81,6 @@ const getVideoDuration = async (buffer) => {
 - **Online Demo**: Limited to 50MB due to server constraints
 - **Local Installation**: No size limits, faster processing
 
-## 🎨 Customization
-
-Add favicon:
-1. Place favicon.ico in `/public` directory
-2. Add to `layout.tsx`:
-```tsx
-export const metadata = {
-  title: 'FFmpeg Video Optimizer',
-  icons: {
-    icon: '/favicon.ico',
-  },
-};
-```
 
 ## 📝 License
 
