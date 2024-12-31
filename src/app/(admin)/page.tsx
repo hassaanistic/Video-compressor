@@ -193,7 +193,7 @@ export default function UploadVideoComponent() {
                                     <Label htmlFor="video-upload" className="cursor-pointer block">
                                         <div className="flex flex-col items-center p-8 hover:bg-gray-700/50 rounded-lg transition-colors">
                                             <Upload className="h-16 w-16 mb-4 text-blue-500" />
-                                            <span className="text-xl font-semibold mb-2">Drag & drop or click to upload</span>
+                                            <span className="text-xl font-semibold mb-2">click to upload</span>
                                             <span className="text-gray-400">MP4 format only (max 50MB)</span>
                                         </div>
                                         <Input
