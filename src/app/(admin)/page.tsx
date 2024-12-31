@@ -250,7 +250,7 @@ export default function UploadVideoComponent() {
                         <h3 className="text-xl font-semibold mb-3">FFmpeg Powered</h3>
                         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                             FFmpeg powers high-quality video compression for files of any size.
-                            <p>
+                            <span className="block">
 
                                 <a
                                     href="https://github.com/hassaanistic/Video-compressor"
@@ -261,7 +261,7 @@ export default function UploadVideoComponent() {
                                     GitHub repository
                                 </a>
                                 {" "}with complete setup instructions.
-                            </p>
+                            </span>
 
                         </p>
                     </div>
